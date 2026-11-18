@@ -1,0 +1,50 @@
+分层,包内路径,仓库来源,角色/职责,产物/记录,手稿位置,字节,sha1_8
+入口/核心,experiments/run_cell.py,experiments/run_cell.py,单元格执行器：建模 + 训练 + 逐 epoch 评估（协议 P-统一）,results/**/*.log,§5.2 协议,15014,34e0e575
+入口/核心,experiments/run_compare.py,experiments/run_compare.py,主对比批次驱动：21 方法 × 任务 × 种子，带完整性闸门与 write_summary,_cmp_<DS>.md/.csv、progress_<DS>.txt,§6.1 Table 1-4,21926,5b881e91
+入口/核心,experiments/run_snr_grid.py,experiments/run_snr_grid.py,SNR 噪声网格：训练干净/测试加噪，27 格,_s66_snr.json（logs/）,§6.6 Table 8b,8660,927efb8e
+入口/核心,experiments/run_stage.py,experiments/run_stage.py,阶段注册表（STAGES/GROUPS）：所有探针与消融批次,results_probe_*/**,§6.3-§6.5,71018,546c356e
+入口/核心,experiments/run_tsne_cm.py,experiments/run_tsne_cm.py,特征几何：t-SNE + 混淆矩阵 + 源/目标可分性,results_geom/、weights_geom/、_s68_geom.md,§6.8 Fig 11/12,25212,693506c0
+分析/原语,analysis/make_all_methods_report.py,analysis/make_all_methods_report.py,记录层原语：read_series / READOUTS / SEEDS / EPOCHS（直读 results/，CLI 只打印）,（被下列脚本 import）,—,9607,acb28c4a
+分析/主对比,analysis/make_61_tables.py,analysis/make_61_tables.py,主对比逐任务主表（主口径 last5）,_<ds>_tables.md,§6.1 Table 1/2、§6.7 Table 9,12236,92e90a7e
+分析/主对比,analysis/summary_compare.py,analysis/summary_compare.py,"配对 Wilcoxon 显著性（锚定""主口径 last5""段，peak 段禁用）",_cmp_<DS>_stats.md,§6.1 Table 4、§6.2、§6.7,16851,65ba095a
+分析/主对比,analysis/summary_rankings.py,analysis/summary_rankings.py,方法与臂的排序表 + 三基准 cross 矩阵,_cmp_<DS>_rankings.md,§6.1-§6.2,6836,93771d7e
+分析/探针,analysis/exp_s65_dilation.py,analysis/exp_s65_dilation.py,膨胀鲁棒性分析器腿：D(s)、平移匹配、逐通道离散、冲击对照,_s65_dilation.md、_s65_dilation.npz,§6.5 Fig 8,12121,9f6e348f
+分析/探针,analysis/summary_align_ablate.py,analysis/summary_align_ablate.py,对齐头消融四臂（w_mmd / w_adv）,_s64_align.md,§6.4 Table 7,13240,bc26f452
+分析/探针,analysis/summary_alpha_sweep.py,analysis/summary_alpha_sweep.py,α（调制深度）扫描摘要，含配对检验 vs 交付臂,_s63_alpha.md,§6.3 Table 5,7568,3f559b39
+分析/探针,analysis/summary_front_ablate.py,analysis/summary_front_ablate.py,前端消融六臂摘要（含参数量表与完整度闸门）,_s63_front.md,§6.3 Table 6,16281,e91bb16e
+分析/探针,analysis/summary_snr.py,analysis/summary_snr.py,SNR 网格摘要（5 列 last5：clean/10/5/0/-5 dB）,_s66_snr.md,§6.6 Table 8b,6959,c5efc6c8
+分析/探针,analysis/summary_tau_ssm_ablate.py,analysis/summary_tau_ssm_ablate.py,τ 调制与选择性 SSM 四臂消融,_s65_tau_ssm.md,§6.4 Table 7、附录 B,10651,8d268702
+分析/研究,analysis/readout_window_study.py,analysis/readout_window_study.py,读数窗口 last-k 的 k 扫描（k 稳定性与 peak 偏差倍数）,_readout_window_study.md,§5.4、附录 A,11544,54ba4d85
+分析/研究,analysis/summary_nondet.py,analysis/summary_nondet.py,同配置不同进程的可复现底噪（best-epoch 口径，正文声明为保守上界）,_repro_floor.md,§5.3,6632,cb9d0cf3
+分析/效率,analysis/exp_e6_efficiency.py,analysis/exp_e6_efficiency.py,参数量分组 / FLOPs / 时延 / 两扫描后端比对,_s66_efficiency.md,§6.6 Table 8、§4.3,20549,9f05c92a
+探针/一次性,logs/_check_fr_lap_pairing.py,logs/_check_fr_lap_pairing.py,fr_lap 是否 RNG 中性（严格配对）的逐张量验证,stdout,§6.3,4347,fc120909
+探针/一次性,logs/_check_front_init.py,logs/_check_front_init.py,front_init 语义核对（未知取值回落到 gabor）,stdout,§6.3,2368,c90178eb
+探针/一次性,logs/_preflight_front_arms.py,logs/_preflight_front_arms.py,前端各臂可训练参数量与前端输出形状预检,stdout（Table 6 参数量列）,§6.3 Table 6,4390,6edf8e5d
+探针/一次性,logs/_s63_plane.py,logs/_s63_plane.py,"(ζ,Π) 平面定位：import fig2 度量模块保证同源",stdout（写入 §6.3 起草注）,§6.3,2695,cc52090f
+探针/一次性,logs/_ssm_scan_facts.py,logs/_ssm_scan_facts.py,扫描后端事实：前向一致性、反传可复现性、单窗时延,stdout（§4.3 实现注记）,§4.3,1727,7734767f
+探针/§6.5,logs/_s65_accuracy_probe.py,logs/_s65_accuracy_probe.py,冻结/可训练/未训练三臂 + 核组审计（extra 模式出冻结臂 T0/T4 剖面）,_s65_accuracy.md、_s65_bank.npz、_s65_frozen_targets.md,§6.5,20503,23ce1e47
+探针/§6.5,logs/_s65_ladder2.py,logs/_s65_ladder2.py,带限精确膨胀阶梯（训练腿，落盘 state_dict）,_s65_ladder2.md/.npz、_s65_model_trained.pt,§6.5 Fig 8c,14303,9bb9d839
+探针/§6.5,logs/_s65_ladder2_eval.py,logs/_s65_ladder2_eval.py,阶梯的评测腿（复用权重，免重训）,_s65_ladder2.md/.npz,§6.5,13591,47646927
+探针/回归,logs/_verify_dgnis_pu.py,logs/_verify_dgnis_pu.py,DGNIS 头数修复后的 PU 回归验证（RNG 消耗量不变）,stdout,§5.5 保真性,1573,a4b907cd
+探针/回归,logs/_verify_fix.py,logs/_verify_fix.py,datasets_src / 批大小两处修复的回归验证,stdout,§5.5 保真性,3931,138595dd
+探针/冒烟,logs/_smoke_alpha.py,logs/_smoke_alpha.py,α 臂冒烟：与主对比 pub 臂逐位对齐自检,stdout,§6.3,2194,d61d2830
+启动器,logs/_regen_figures_wsl.sh,logs/_regen_figures_wsl.sh,图件规范化重建（9 个图脚本，WSL 规范解释器）,docs/manuscript/figures/**,全篇图件,475,91b222b8
+启动器,logs/resume_front.sh,logs/resume_front.sh,前端批次补漏续跑 + 自动刷新摘要与图,_s63_front.md、Fig 6,§6.3,1632,fe158e17
+启动器,logs/resume_snr.sh,logs/resume_snr.sh,SNR 续跑 + 自动刷新摘要与图,_s66_snr.md、Fig 9d,§6.6,1632,a8cc169d
+启动器,logs/run_front_ablate.sh,logs/run_front_ablate.sh,前端消融批次（tmux 会话 fr）,results_probe_front/、logs/front_ablate_clean.log,§6.3,563,35137232
+启动器,logs/run_front_lap.sh,logs/run_front_lap.sh,fr_lap 追加臂（等 fr 会话结束）,results_probe_front/,§6.3,1197,e1545d9b
+启动器,logs/run_snr_grid.sh,logs/run_snr_grid.sh,SNR 网格（tmux 会话 snr）,_s66_snr.json,§6.6,1408,34141578
+启动器,logs/wait_then_geom_snr.sh,logs/wait_then_geom_snr.sh,串行队列：等 fr → 特征几何 → SNR,results_geom/、_s66_snr.json,§6.8,1461,ae2e532a
+启动器,logs/wait_then_snr.sh,logs/wait_then_snr.sh,串行队列：等 fr 结束 → SNR,—,—,811,99f829c4
+工具/启动,tools/detach.sh,tools/detach.sh,后台化启动（规避命令行 & 被改写）,任意日志,—,820,a4a9602a
+工具/启动,tools/resume_hust.sh,tools/resume_hust.sh,HUST 主对比续跑（DGNIS 头数修复后补 4 方法 × 10 任务）,results/HUST/**,§5.5、§6.7,2296,d74272b3
+工具/启动,tools/run_compare_dataset.sh,tools/run_compare_dataset.sh,主对比一键启动（含 AGM_FORCE_PY_SCAN=1，tee 到 logs/cmp_<DS>.log）,logs/cmp_<DS>.log,§6.1,1425,8196df69
+工具/监控,tools/watch_agmamba.sh,tools/watch_agmamba.sh,主对比进度守候：AGMamba 段完成即报警，列出缺失单元,"logs/AGMAMBA_{DONE,MISSING}_<DS>.txt",—,4926,d4a927c8
+工具/体检,tools/check_determinism.py,tools/check_determinism.py,确定性自检：同配置重复运行 + 两扫描后端比对,stdout,§4.3、§5.2,4619,5ce47550
+工具/体检,tools/check_incomplete.py,tools/check_incomplete.py,完整性闸门：列出半截/空日志与未满 60 点的单元,stdout,—,3411,8e78692d
+工具/体检,tools/check_stages.py,tools/check_stages.py,run_stage 的 stage 注册表自检,stdout,—,688,d88075e1
+工具/体检,tools/list_arms.py,tools/list_arms.py,列出 results/ 下实际存在的臂名,stdout,—,627,1b7848fe
+工具/数据,tools/prepare_hust.py,tools/prepare_hust.py,HUST 数据准备：切窗、选域与类别,datasets/hust_data/hust_x1024.npz,§5.1,2206,c2273c11
+工具/数据,tools/prepare_phm2009.py,tools/prepare_phm2009.py,PHM 2009 数据准备：解压与重采样,datasets/**,§5.1,2194,550b0737
+口径快照,docs/COMPARE_PROTOCOL.md,docs/COMPARE_PROTOCOL.md,唯一权威协议（含变更记录表；主口径已改为 last5）,—,§5 全节,30017,a0a77c45
+口径快照,docs/configs.yaml,agmamba/configs.yaml,交付模型配置（快照，仓库版本为权威）,—,§4-§5,1966,2c1dcc11
