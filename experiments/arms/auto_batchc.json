@@ -1,0 +1,67 @@
+{
+  "variants": [
+    {
+      "name": "sd_12x",
+      "kwargs": {
+        "front_mode": "gaborwide",
+        "front_init": "gabor",
+        "front_chan": 512,
+        "gabor_f_lo": 0.0025,
+        "front_ksize": 128,
+        "gabor_dc_frac": 0.3,
+        "gabor_alias": 2.0,
+        "use_ssm": true,
+        "tau_mode": "zero",
+        "steps_override": 5760,
+        "use_scheduler": true
+      }
+    },
+    {
+      "name": "sd_6x_ssmbig",
+      "kwargs": {
+        "front_mode": "gaborwide",
+        "front_init": "gabor",
+        "front_chan": 512,
+        "gabor_f_lo": 0.0025,
+        "front_ksize": 128,
+        "gabor_dc_frac": 0.3,
+        "gabor_alias": 2.0,
+        "use_ssm": true,
+        "tau_mode": "zero",
+        "steps_override": 2880,
+        "use_scheduler": true,
+        "n_blocks": 4,
+        "d_model": 192,
+        "d_inner": 192
+      }
+    },
+    {
+      "name": "sd_6x_k256",
+      "kwargs": {
+        "front_mode": "gaborwide",
+        "front_init": "gabor",
+        "front_chan": 512,
+        "gabor_f_lo": 0.0025,
+        "front_ksize": 256,
+        "gabor_dc_frac": 0.3,
+        "gabor_alias": 2.0,
+        "use_ssm": true,
+        "tau_mode": "zero",
+        "steps_override": 2880,
+        "use_scheduler": true
+      }
+    }
+  ],
+  "tasks": [
+    "T0",
+    "T4",
+    "T9"
+  ],
+  "seeds": [
+    0,
+    1,
+    2,
+    3,
+    4
+  ]
+}

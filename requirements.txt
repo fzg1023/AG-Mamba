@@ -1,0 +1,13 @@
+# 训练与评测（版本为本文实验所用）
+torch==2.3.1
+numpy==2.0.2
+scipy==1.13.1
+scikit-learn==1.6.1
+matplotlib==3.9.4
+pandas
+pyyaml
+tqdm
+# 表格/图与文档工具
+# 可选：官方 CUDA 选择性扫描内核（缺失时自动回落纯 PyTorch 实现）
+# mamba-ssm==2.2.4
+# causal-conv1d==1.4.0

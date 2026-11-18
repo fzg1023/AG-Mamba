@@ -1,0 +1,80 @@
+{
+  "_comment": "臂注册表：脚本只从这里读臂定义，不再写死。键 = 臂名，值 = 相对冻结配置的 kwargs。",
+  "_frozen_note": "frozen = 交付（干净版）：受控混叠 Gabor 前端 + 标准选择性 SSM；无对齐头（w_mmd/w_adv = 0，域判别器不构建）、无液体项（tau_mode = zero，τ₀ 估计器与 γ 调制不构建）。",
+  "_af_note": "af_* = 干净（无对齐头 + 无液体项）交付臂；xg2_* = 同批次有对齐对照臂（w_mmd 0.5 / w_adv 0.1）。af_* 显式写出 0 值，即使 frozen 以后变动也保持无对齐。",
+  "protocols": {
+    "delivered": {
+      "steps_override": 2880,
+      "use_scheduler": true
+    },
+    "probe": {}
+  },
+  "frozen": {
+    "front_mode": "gaborwide",
+    "front_init": "gabor",
+    "front_chan": 512,
+    "gabor_f_lo": 0.0025,
+    "front_ksize": 128,
+    "gabor_dc_frac": 0.3,
+    "gabor_alias": 2.0,
+    "use_ssm": true,
+    "tau_mode": "zero",
+    "w_mmd": 0.0,
+    "w_adv": 0.0
+  },
+  "arms": {
+    "af6x": {
+      "protocol": "delivered",
+      "w_mmd": 0.0,
+      "w_adv": 0.0,
+      "tau_mode": "zero"
+    },
+    "af_std": {
+      "protocol": "probe",
+      "w_mmd": 0.0,
+      "w_adv": 0.0,
+      "tau_mode": "zero"
+    },
+    "af_6x": {
+      "protocol": "delivered",
+      "w_mmd": 0.0,
+      "w_adv": 0.0,
+      "tau_mode": "zero"
+    },
+    "agm6x": {
+      "protocol": "delivered"
+    },
+    "agm_std": {
+      "protocol": "probe"
+    },
+    "xg2_std": {
+      "protocol": "probe",
+      "w_mmd": 0.5,
+      "w_adv": 0.1
+    },
+    "xg2_6x": {
+      "protocol": "delivered",
+      "w_mmd": 0.5,
+      "w_adv": 0.1
+    },
+    "base": {
+      "front_mode": "cnn",
+      "front_chan": 128,
+      "front_ksize": 64,
+      "front_init": "none",
+      "wave_init": false
+    },
+    "alpha0": {
+      "gabor_alias": 0.0
+    },
+    "alpha1": {
+      "gabor_alias": 1.0
+    },
+    "alpha3": {
+      "gabor_alias": 3.0
+    },
+    "nossm": {
+      "use_ssm": false
+    }
+  }
+}
